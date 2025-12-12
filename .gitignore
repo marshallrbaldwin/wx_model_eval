@@ -19,3 +19,7 @@ slurm/
 *fuckery*.py
 wx_model_eval/*.py
 wx_model_eval/dead_code/
+
+#jupyter lab junk
+*.ipynb_checkpoints/
+

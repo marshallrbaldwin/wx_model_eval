@@ -718,9 +718,12 @@ def _run(eval_file_name_or_pattern, by_month, by_hour,
                         target_field_names[k]
                     ]
                 else:
-                    this_fancy_field_name = TARGET_FIELD_NAME_TO_VERBOSE[
-                        target_field_names[k]
-                    ]
+                    if target_field_names[k] in TARGET_FIELD_NAME_TO_VERBOSE:
+                        this_fancy_field_name = TARGET_FIELD_NAME_TO_VERBOSE[
+                            target_field_names[k]
+                        ]
+                    else:
+                        this_fancy_field_name = target_field_names[k]
 
                 title_string = (
                     '{0:s}{1:s} for {2:s}{3:s}\n'
