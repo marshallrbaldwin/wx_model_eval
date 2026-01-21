@@ -67,14 +67,15 @@ def read_inputs(prediction_file_names, target_field_names):
     E = number of examples
     M = number of rows in grid
     N = number of columns in grid
+    F = number of target fields
     S = ensemble size
 
     :param prediction_file_names: 1-D list of paths to prediction files.
         Each file will be read by `prediction_io.read_file`.
     :param target_field_names: 1-D list of field names desired.
-    :return: prediction_matrix: E-by-M-by-N-by-1-by-S numpy array of
+    :return: prediction_matrix: E-by-M-by-N-by-F-by-S numpy array of
         predictions.
-    :return: target_matrix: E-by-M-by-N-by-1 numpy array of actual values.
+    :return: target_matrix: E-by-M-by-N-by-F numpy array of actual values.
     """
 
     # TODO(thunderhoser): Put this in prediction_io.py.
@@ -82,6 +83,7 @@ def read_inputs(prediction_file_names, target_field_names):
     error_checking.assert_is_string_list(prediction_file_names)
     error_checking.assert_is_string_list(target_field_names)
 
+    num_fields = len(target_field_names)
     num_times = len(prediction_file_names)
     prediction_matrix = numpy.array([], dtype=float)
     target_matrix = numpy.array([], dtype=float)
@@ -109,7 +111,7 @@ def read_inputs(prediction_file_names, target_field_names):
             ensemble_size = tpt[prediction_io.PREDICTION_KEY].values.shape[-1]
 
             these_dim = (
-                num_times, num_grid_rows, num_grid_columns, 1, ensemble_size
+                num_times, num_grid_rows, num_grid_columns, num_fields, ensemble_size
             )
             prediction_matrix = numpy.full(
                 these_dim, numpy.nan, dtype=numpy.float32
