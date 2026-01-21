@@ -282,14 +282,14 @@ def plot_spread_vs_skill(
     )
 
     if target_field_name in FIELD_NAME_TO_TITLE:
-        title_name = FIELD_NAME_TO_TITLE[target_field_name]
+        verbose_name = FIELD_NAME_TO_TITLE[target_field_name]
     else:
-        title_name = target_field_name
+        verbose_name = target_field_name
     title_string = (
         'Spread vs. skill for {0:s}\n'
         'SSREL = {1:.2f}; SSRAT = {2:.2f}'
     ).format(
-        title_name,
+        verbose_name,
         spread_skill_reliability,
         spread_skill_ratio
     )

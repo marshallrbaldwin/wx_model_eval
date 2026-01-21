@@ -322,7 +322,12 @@ def _plot_distributions(
         x_values, prediction_y_values, color=PREDICTION_COLOUR, alpha=0.2
     )
 
-    axes_object.set_xlabel(TARGET_FIELD_NAME_TO_VERBOSE[target_field_name])
+    if target_field_name in TARGET_FIELD_NAME_TO_VERBOSE:
+        verbose_name = TARGET_FIELD_NAME_TO_VERBOSE[target_field_name]
+    else:
+        verbose_name = target_field_name
+        
+    axes_object.set_xlabel(verbose_name)
     axes_object.set_ylabel('Probability density')
 
     legend_handles = [target_handle, prediction_handle]
@@ -353,7 +358,7 @@ def _plot_distributions(
         'left tails' if plotting_left_tail
         else 'right tails' if plotting_right_tail
         else 'distributions',
-        TARGET_FIELD_NAME_TO_VERBOSE[target_field_name]
+        verbose_name
     )
     axes_object.set_title(title_string)
 
@@ -507,8 +512,12 @@ def _plot_error_distribution(
         else 'Predicted'
     ))
 
+    if target_field_name in TARGET_FIELD_NAME_TO_VERBOSE:
+        verbose_name = TARGET_FIELD_NAME_TO_VERBOSE[target_field_name]
+    else:
+        verbose_name = target_field_name
     title_string = 'Error distribution for {0:s}'.format(
-        TARGET_FIELD_NAME_TO_VERBOSE[target_field_name]
+        verbose_name
     )
     axes_object.set_title(title_string)
 
